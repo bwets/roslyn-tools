@@ -7,7 +7,7 @@ namespace RoslynTreeView
 {
     public partial class Main : Form
     {
-        private string _filename = @"D:\Sources\Aperam\Sandbox\Generators\GeneratorTests\GeneratorTests\TestList.cs";
+        private string _filename = @"";
         public Main()
         {
             InitializeComponent();
@@ -15,7 +15,8 @@ namespace RoslynTreeView
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            await Reload(_filename);
+            //await Reload(_filename);
+            await SelectFile();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -61,6 +62,11 @@ namespace RoslynTreeView
             await Visitor.Start(treeView1, _filename);
         }
         private async void button1_Click(object sender, EventArgs e)
+        {
+            await SelectFile();
+        }
+
+        private async Task SelectFile()
         {
             var dialog = new OpenFileDialog();
             dialog.Filter = "CSharp|*.cs";
